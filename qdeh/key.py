@@ -51,5 +51,5 @@ def last_key() -> str:
 
 
 if __name__ == '__main__':
-    # print(pass_key())
+    print(pass_key())
     print(show_keys())

@@ -37,4 +37,5 @@ def menu_main():
 """, title='[blue]Menu de opções[/]', height=13, highlight=True))
 
 
-# print(menu_main())
+if __name__ == '__main__':
+    print(menu_main())

@@ -13,8 +13,8 @@ headers: dict = {
     'Connection': 'close'}
 
 
-data_atual = datetime.now().strftime(r'%d/%m/%Y %H:%M:%S')
 def clima_agora(nome_cidade: str, key: str = '') -> str:
+    data_atual = datetime.now().strftime(r'%d/%m/%Y %H:%M:%S')
     if len(key) == 8:
         key = f'key={key}'
     busca_por_woeid: str = f'https://api.hgbrasil.com/stats/find_woeid?{key}&format=json-cors&sdk_version=console&city_name={nome_cidade}'
@@ -68,4 +68,4 @@ def clima_agora(nome_cidade: str, key: str = '') -> str:
 
 
 if __name__ in '__main__':
-    print(clima_agora('maua', '17284dd0'))
+    print(clima_agora('sao paulo', 'sua_chave_aqui'))
