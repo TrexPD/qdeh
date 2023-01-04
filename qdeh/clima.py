@@ -21,7 +21,7 @@ def clima_agora(nome_cidade: str, key: str = '') -> str:
     try:
         with Session().get(busca_por_woeid, headers=headers) as sessao1:
             if 'error' in sessao1.json():
-                return (f'{sessao1.json()}\n\nCadastre sua chave de acesso (key) no [b]"menu de opcões"[/] para fazer novas consultas!')
+                return (f'{sessao1.json()}\n\nCadastre sua chave(key) de acesso no [b]"menu de opcões"[/] para fazer novas consultas!')
             else:
                 city_name = sessao1.json()['name']
                 region = sessao1.json()['region']
@@ -37,7 +37,7 @@ def clima_agora(nome_cidade: str, key: str = '') -> str:
             data_atual_dict = {'more_info': {'city': city_name, 'region': region, 'country': country, 'woeid': woeid, 'last_consultation': data_atual}}
             juntar_dict = {**sessao2.json(), **data_atual_dict}
             arquivo_json = str(juntar_dict).replace("'", '"').replace('True', 'true').replace('False', 'false')
-            with open('.\\files\\clima_atual.json', mode='wt', encoding='utf-8') as arquivo:
+            with open('.\\assets\\clima_atual.json', mode='wt', encoding='utf-8') as arquivo:
                 arquivo.write(arquivo_json)
                 titulo = Text(f"[black on white]Previsão do tempo para a cidade de [blue]{city_name}, {region}, {country}[/blue][/]\n", no_wrap=True, justify='left')
                 temperatura = sessao2.json()['results']['temp']

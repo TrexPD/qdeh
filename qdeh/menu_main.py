@@ -3,8 +3,9 @@ from datetime import datetime
 
 
 def menu_main():
-    data_atual = datetime.now().strftime(r'%d/%m/%Y')
-    dia_semana_atual = datetime.now().isoweekday()
+    data_atual: str = datetime.now().strftime(r'%d/%m/%Y')
+    dia_semana_atual: int = datetime.now().isoweekday()
+    hora_atual: int = datetime.now().hour
     semanas: dict = {
         1: 'Segunda-Feira',
         2: 'Terça-Feira',
@@ -14,22 +15,22 @@ def menu_main():
         6: 'Sábado',
         7: 'Domigo',
     }
-    
-    if (datetime.now().hour) >= 5 and (datetime.now().hour) < 12:
-        cumprimento = 'Bom dia!'
-    if (datetime.now().hour) >= 12 and (datetime.now().hour) < 18:
-        cumprimento = 'Boa tarde!'
-    if (datetime.now().hour) >= 18 and (datetime.now().hour) < 23:
-        cumprimento = 'Boa noite!'
+
+    if hora_atual >= 5 and hora_atual < 12:
+        cumprimento: str = 'Bom dia!'
+    elif hora_atual >= 12 and hora_atual < 18:
+        cumprimento: str = 'Boa tarde!'
+    elif hora_atual >= 18 and hora_atual < 25:
+        cumprimento: str = 'Boa noite!'
     else:
-        cumprimento = 'Boa madrugada!'
+        cumprimento: str = 'Boa madrugada!'
     return (Panel(f"""
     [b]Olá, [cyan]{cumprimento}[/][/]
     [b]Hoje é [cyan]{semanas[dia_semana_atual]}[/], dia {data_atual}[/]!
     
     [b]Escolha uma opção abaixo, digitando o seu número correspondente![/b]
 
-    1 -> Clima e data de hoje
+    1 -> Ver o [b]clima[/] e datas de hoje
     2 -> Digitar uma data especifica
     3 -> Adicionar minha própria Chave(Key)
     4 -> Mostrar todas as Chaves(keys)

@@ -5,7 +5,7 @@ from rich.layout import Layout
 from rich.console import Console
 from key import pass_key, show_keys, last_key
 from clima import clima_agora
-from datas import ler_arquivo_csv
+from dados import ler_arquivo_csv
 from time import sleep
 from re import findall
 from rich import print
@@ -44,10 +44,11 @@ with console.screen() as screen:
     chave_key: str = last_key()
     while True:
         sair: bool = False
+        force_menu: bool = False
         screen.update(menu_main())
         escolha: int = leia_inteiros()
         if escolha == 0:
-            with console.status('Obrigado por usar nosso calendário. Volte Sempre! :heart:'):
+            with console.status('Obrigado por usar nosso sistema. Volte Sempre! :heart:'):
                 sleep(2)
                 break
         elif escolha > 4 or escolha < 0:
@@ -79,6 +80,7 @@ with console.screen() as screen:
                 if escolha == 3:
                     screen.update('')
                     chave_key = pass_key()
+                    force_menu = True
                     break
 
                 if escolha == 4:
@@ -86,6 +88,8 @@ with console.screen() as screen:
                     break
 
             while True:
+                if force_menu:
+                    break
                 outra_opcao = str(console.input('Você quer sair do app ou voltar ao menu? [cyan][Sair | Menu]:[/] ')).strip().lower()
                 if outra_opcao == 'menu':
                     break                      
@@ -96,6 +100,6 @@ with console.screen() as screen:
                     print('[red]Alternativa incorreta, digite apenas [b]menu[/b] ou [b]sair[/b]![/red]')
 
         if sair:
-            with console.status('Obrigado por usar nosso calendário. Volte Sempre! [b]:heart:[/b]'):
+            with console.status('Obrigado por usar nosso sistema. Volte Sempre! [b]:heart:[/b]'):
                 sleep(2)
                 break

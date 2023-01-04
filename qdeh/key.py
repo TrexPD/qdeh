@@ -7,8 +7,8 @@ from datetime import datetime
 
 
 
-data_atual = datetime.now().strftime(r'%d/%m/%Y %H:%M:%S')
-db_key = TinyDB(".\\files\\key.json", encoding="utf-8", ensure_ascii=False)
+data_atual: str = datetime.now().strftime(r'%d/%m/%Y %H:%M:%S')
+db_key = TinyDB(".\\assets\\key.json", encoding="utf-8", ensure_ascii=False)
 def pass_key() -> str:
     console = Console()
     console.print(Panel(Text.from_ansi('''
@@ -20,12 +20,14 @@ def pass_key() -> str:
     ''', justify='left'), title='[cyan]Chave Key[/]'))
 
     while True:
-        chave_key = str(console.input('\nDigite sua [u][cyan]Chave Key[/][/] aqui: ')).strip()
+        chave_key = str(console.input('\nDigite sua [u][cyan]Chave Key[/][/] ou [u][cyan]Sair[/][/]: ')).strip()
         if len(chave_key) == 8:
             db_key.default_table_name = 'Acess_key'
             db_key.insert({'Key': [{'Chave(key):': f'{chave_key}'}, {'Adicionada_em:': f'{data_atual}'}]})
             console.print('Sua [cyan]Chave Key[/] foi salva com sucesso!\n')
             return chave_key
+        if chave_key.lower() == 'sair':
+            return ''
         else:
             console.print('[b]Atenção:[/] Sua [u][red]Chave Key[/][/] tem que ter 8 caracteres!')
 
