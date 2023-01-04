@@ -52,9 +52,8 @@ with console.screen() as screen:
                 sleep(2)
                 break
         elif escolha > 4 or escolha < 0:
-            print()
-            print('[red]Alternativa incorreta, digite apenas 0, 1 ou 2![/red]')
-            print()
+            print('[red]Alternativa incorreta, digite apenas 0, 1, 2, 3 ou 4![/red]')
+            sleep(3)
         else:
             while True:
                 if escolha == 1:
