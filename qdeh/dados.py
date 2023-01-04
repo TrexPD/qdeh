@@ -21,7 +21,6 @@ def ler_arquivo_csv(data_escolhida: str):
     arquivo_csv = pd.read_csv(f'.\\assets\\cal_{ano_atual}.csv')
     localizar = arquivo_csv.loc[arquivo_csv['Dia/Mês'] == f'{data_escolhida}']
     if tabela.columns:
-        # tabela.add_column('Datas Comemoativas', no_wrap=True)
         for i in localizar.itertuples():
             tabela.add_row(i[2])
         return tabela
