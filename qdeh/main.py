@@ -36,7 +36,7 @@ def painel_info(cidade: str, key: str = ''):
     layout['main'].split_column(Layout(name='cima', minimum_size=13), Layout(name='baixo', minimum_size=10))
     layout['cima'].split_row(Layout(previsao_tempo, name='esquerda'), Layout(calendario, name='direita')) 
 
-    return (layout)
+    return layout
 
 
 

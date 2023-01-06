@@ -2,7 +2,7 @@ from requests.sessions import Session
 from rich.text import Text
 from rich import print
 from datetime import datetime
-
+from pathlib import Path
 
 
 headers: dict = {
@@ -13,6 +13,7 @@ headers: dict = {
     'Connection': 'close'}
 
 
+# Faz a requisição na API, 1° pega o nome da cidade, 2° as informções do clima!
 def clima_agora(nome_cidade: str, key: str = '') -> str:
     data_atual = datetime.now().strftime(r'%d/%m/%Y %H:%M:%S')
     if len(key) == 8:
@@ -37,7 +38,7 @@ def clima_agora(nome_cidade: str, key: str = '') -> str:
             data_atual_dict = {'more_info': {'city': city_name, 'region': region, 'country': country, 'woeid': woeid, 'last_consultation': data_atual}}
             juntar_dict = {**sessao2.json(), **data_atual_dict}
             arquivo_json = str(juntar_dict).replace("'", '"').replace('True', 'true').replace('False', 'false')
-            with open('.\\assets\\clima_atual.json', mode='wt', encoding='utf-8') as arquivo:
+            with open(Path('assets', 'clima_atual.json'), mode='wt', encoding='utf-8') as arquivo:
                 arquivo.write(arquivo_json)
                 titulo = Text(f"[black on white]Previsão do tempo para a cidade de [blue]{city_name}, {region}, {country}[/blue][/]\n", no_wrap=True, justify='left')
                 temperatura = sessao2.json()['results']['temp']

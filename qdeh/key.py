@@ -4,11 +4,11 @@ from rich.console import Console
 from tinydb import TinyDB
 from rich.table import Table, box
 from datetime import datetime
-
+from pathlib import Path
 
 
 data_atual: str = datetime.now().strftime(r'%d/%m/%Y %H:%M:%S')
-db_key = TinyDB(".\\assets\\key.json", encoding="utf-8", ensure_ascii=False)
+db_key = TinyDB(Path('assets', 'key.json'), encoding="utf-8", ensure_ascii=False)
 def pass_key() -> str:
     console = Console()
     console.print(Panel(Text.from_ansi('''

@@ -4,13 +4,14 @@ from rich.table import Table, box
 from rich.text import Text
 from rich import print
 from json import load
+from pathlib import Path
 
 
 # Cria um novo arquivo csv, de acordo com o ano vigente! 
 def new_file():
     ano_atual = date.today().year
     tabela = pd.read_html('https://www.ponteiro.com.br/todas_datas.php')[0][3:].drop(columns=[1, 3]).dropna(how='all')
-    tabela.to_csv(f'cal_{ano_atual}.csv', index=False, encoding='utf-8-sig', header=['Dia/Mês', 'Data Sazonal'])
+    tabela.to_csv(Path('assets', f'cal_{ano_atual}.csv'), index=False, encoding='utf-8-sig', header=['Dia/Mês', 'Data Sazonal'])
 
 
 # Ler o arquivo 'calendário 2022' dentro da pasta files!
@@ -18,7 +19,7 @@ def ler_arquivo_csv(data_escolhida: str):
     ano_atual = date.today().year # Retorna o ano vigente!
     tabela = Table(f'[blue]|[/] [b]Todas as datas comemorativas em [blue]{data_escolhida}/{ano_atual}![/][/b]',
     box=box.SIMPLE)
-    arquivo_csv = pd.read_csv(f'.\\assets\\cal_{ano_atual}.csv')
+    arquivo_csv = pd.read_csv(Path('assets', f'cal_{ano_atual}.csv'))
     localizar = arquivo_csv.loc[arquivo_csv['Dia/Mês'] == f'{data_escolhida}']
     if tabela.columns:
         for i in localizar.itertuples():
@@ -29,7 +30,7 @@ def ler_arquivo_csv(data_escolhida: str):
 
 
 def arquivo_cache_json():
-    with open('.\\assets\\clima_atual.json', mode='rt', encoding='utf-8') as arquivo:
+    with open(Path('assets', 'clima_atual.json'), mode='rt', encoding='utf-8') as arquivo:
         arquivo_json = load(arquivo)
         titulo = Text(f"[black on white]Previsão do tempo para a cidade de [blue]{arquivo_json['results']['city']}, {arquivo_json['more_info']['country']}[/blue][/]\n", no_wrap=True, justify='left')
         temperatura = arquivo_json['results']['temp']
