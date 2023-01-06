@@ -49,7 +49,7 @@ with console.screen() as screen:
         escolha: int = leia_inteiros()
         if escolha == 0:
             with console.status('Obrigado por usar nosso sistema. Volte Sempre! :heart:'):
-                sleep(2)
+                sleep(3)
                 break
         elif escolha > 4 or escolha < 0:
             print('[red]Alternativa incorreta, digite apenas 0, 1, 2, 3 ou 4![/red]')
@@ -91,16 +91,16 @@ with console.screen() as screen:
             while True:
                 if force_menu:
                     break
-                outra_opcao = str(console.input('Você quer sair do app ou voltar ao menu? [cyan][Sair | Menu]:[/] ')).strip().lower()
+                outra_opcao = str(console.input('Você quer sair do app ou voltar ao menu? [b][Sair | Menu]:[/] ')).strip().lower()
                 if outra_opcao == 'menu':
                     break                      
                 if outra_opcao == 'sair':   
                     sair = True
                     break
                 else:
-                    print('[red]Alternativa incorreta, digite apenas [b]menu[/b] ou [b]sair[/b]![/red]')
+                    print('[yellow]Alternativa incorreta, digite apenas [b][red]menu[/][/] ou [b][red]sair[/][/]![/]', end='\r')
 
         if sair:
             with console.status('Obrigado por usar nosso sistema. Volte Sempre! [b]:heart:[/b]'):
-                sleep(2)
+                sleep(3)
                 break
