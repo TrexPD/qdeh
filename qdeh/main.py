@@ -65,17 +65,19 @@ with console.screen() as screen:
                 if escolha == 2:
                     screen.update('')
                     data_escolhida = str(console.input('Digite a data comemorativa você quer ver? [cyan]Ex: [DD/MM]:[/] ')).strip()
-                    if findall(r'[0-9]{2}/[0-9]{2}', data_escolhida):
+                    if findall(r'([0-9]{2}/[0-9]{2})', data_escolhida):
                         dia = int(data_escolhida[0:2])
                         mes = int(data_escolhida[3:5])
                         if dia > 31 or dia < 1 or mes > 12 or mes < 1:
                             print('[red][b]Data inválida[/b], digite outra data![/red]')     
+                            sleep(3)
                         else:
                             screen.update(ler_arquivo_csv(data_escolhida))
                             break
                     else:
-                        print('[red]A data tem que estar no formato seguinte. Obs: A barra é obrigátoria! Ex: 12/04[/red]')
-                
+                        print('[red]A data tem que estar no seguinte formato. Ex: 01/01[/red]')
+                        sleep(3)
+
                 if escolha == 3:
                     screen.update('')
                     chave_key = pass_key()
